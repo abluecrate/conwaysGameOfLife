@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
+import argparse
 import time
 
 #-------------------------------------------------------------------------
@@ -59,7 +61,16 @@ class Engine(object):
 #-------------------------------------------------------------------------
 
 def main():
-    board = Board((256,256))
+
+    ap = argparse.ArgumentParser(add_help = False)  # Intilialize Argument Parser
+    ap.add_argument('-h', '--height', help = 'Board Height', default = 256)
+    ap.add_argument('-w', '--width', help = 'Board Width', default = 256)
+    args = vars(ap.parse_args())    # Gather Arguments
+
+    bHeight = int(args['height'])
+    bWidth = int(args['width'])
+
+    board = Board((bHeight,bWidth))
     for _ in board.animate():
         pass
 #-------------------------------------------------------------------------
